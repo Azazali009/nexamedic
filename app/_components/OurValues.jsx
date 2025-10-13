@@ -42,6 +42,7 @@ export default function OurValues({ data }) {
           <video
             controls={true}
             preload="auto"
+            poster="/our-value-poster.png"
             className="absolute inset-0 h-full w-full object-cover"
           >
             <source src={data?.video?.url} type="video/mp4" />
