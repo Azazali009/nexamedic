@@ -53,7 +53,6 @@ export default async function Home() {
   const endpoint = `/api/home?${ourQuery}`;
   const homeData = await fetchDataFromApi(endpoint);
 
-  if (!homeData) return <p>hsdjk</p>;
   function OurRendered(item, index) {
     if (item?.__component === "blocks.home-hero") {
       return <HomeHero key={index} data={item} />;
