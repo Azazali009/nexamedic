@@ -38,11 +38,11 @@ export default function OurValues({ data }) {
         >
           {data?.title}
         </h2>
-        <div className="relative aspect-video w-full overflow-hidden">
+        <div className="relative mx-auto aspect-video w-full overflow-hidden md:w-[80%]">
           <video
             controls={true}
             preload="auto"
-            poster="/our-value-poster.png"
+            poster="/value-poster.webp"
             className="absolute inset-0 h-full w-full object-cover"
           >
             <source src={data?.video?.url} type="video/mp4" />
