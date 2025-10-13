@@ -44,7 +44,11 @@ export default async function Home() {
             },
           },
           "blocks.our-value": {
-            populate: "*",
+            populate: {
+              video: {
+                populate: "*",
+              },
+            },
           },
         },
       },

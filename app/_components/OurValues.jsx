@@ -39,14 +39,13 @@ export default function OurValues({ data }) {
           {data?.title}
         </h2>
         <div className="relative aspect-video w-full overflow-hidden">
-          <iframe
-            title="vimeo-player"
-            src="https://player.vimeo.com/video/1125900592?h=695142dc53"
-            frameborder="0"
-            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-            allowfullscreen
-            className="absolute top-0 left-0 h-full w-full"
-          ></iframe>
+          <video
+            controls={true}
+            preload="auto"
+            className="absolute inset-0 h-full w-full object-cover"
+          >
+            <source src={data?.video?.url} type="video/mp4" />
+          </video>
         </div>
       </div>
 
