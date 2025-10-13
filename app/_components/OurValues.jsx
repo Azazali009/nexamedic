@@ -38,7 +38,7 @@ export default function OurValues({ data }) {
         >
           {data?.title}
         </h2>
-        {/* <div className="relative aspect-video w-full overflow-hidden">
+        <div className="relative aspect-video w-full overflow-hidden">
           <iframe
             title="vimeo-player"
             src="https://player.vimeo.com/video/1125900592?h=695142dc53"
@@ -47,11 +47,11 @@ export default function OurValues({ data }) {
             allowfullscreen
             className="absolute top-0 left-0 h-full w-full"
           ></iframe>
-        </div> */}
+        </div>
       </div>
 
       {/* <VideoScrub /> */}
-      <VideoExpandWidth />
+      {/* <VideoExpandWidth /> */}
       {/* <VideoExpanded /> */}
     </section>
   );
