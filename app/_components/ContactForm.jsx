@@ -95,7 +95,7 @@ export default function ContactForm({ data }) {
             id="firstName"
             type="text"
             name="firstName"
-            autoComplete="name"
+            autoComplete="first name"
             placeholder="First Name"
             className="min-h-6 rounded-md border border-[#D9D9D9] bg-white px-4 placeholder:text-[11px] placeholder:text-[#A4ADB3] focus:border-[#D9D9D9] focus:outline-none sm:h-12 sm:rounded-2xl sm:placeholder:text-lg"
           />
@@ -105,7 +105,7 @@ export default function ContactForm({ data }) {
             id="lastName"
             type="text"
             name="lastName"
-            autoComplete="name"
+            autoComplete="last name"
             placeholder="Last Name"
             className="min-h-6 rounded-md border border-[#D9D9D9] bg-white px-4 placeholder:text-[11px] placeholder:text-[#A4ADB3] focus:border-[#D9D9D9] focus:outline-none sm:h-12 sm:rounded-2xl sm:placeholder:text-lg"
           />
