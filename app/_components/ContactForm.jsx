@@ -162,6 +162,7 @@ export default function ContactForm({ data }) {
           <input
             required
             name="isAgreeWithPrivacyPolicy"
+            id="isAgreeWithPrivacyPolicy"
             className="border-gray-secondary accent-primary checked:border-primary checked:bg-primary h-[1.1rem] w-[1.1rem] cursor-pointer appearance-none rounded-xs border bg-white transition duration-150"
             type="checkbox"
           />

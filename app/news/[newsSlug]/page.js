@@ -4,6 +4,7 @@ import { fetchDataFromApi } from "@/app/_utils/strapiFetcher";
 import qs from "qs";
 import Markdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
+import rehypeExternalLinks from "rehype-external-links";
 
 export default async function Page({ params }) {
   const { newsSlug } = await params;
@@ -41,7 +42,18 @@ export default async function Page({ params }) {
       <NewsIntroPart newsData={newsData} />
       <div className="relative mx-auto grid max-w-full grid-cols-[1fr_50px] gap-10 py-10 sm:grid-cols-[1fr_5rem] lg:w-[85%] lg:grid-cols-[1fr_0.5fr]">
         <div className="prose prose-a:text-primary prose-img:w-full prose-h2:text-sm sm:prose-p:text-base prose-p:text-xs prose-h3:text-sm sm:prose-h3:text-xl prose-li:text-xs sm:prose-li:text-base sm:prose-h2:text-2xl prose-img:inline max-w-none px-4 lg:px-0">
-          <Markdown rehypePlugins={[rehypeRaw]}>{newsData?.richText}</Markdown>
+          {/* <Markdown rehypePlugins={[rehypeRaw]}>{newsData?.richText}</Markdown> */}
+          <Markdown
+            rehypePlugins={[
+              rehypeRaw,
+              [
+                rehypeExternalLinks,
+                { target: "_blank", rel: ["noopener", "noreferrer"] },
+              ],
+            ]}
+          >
+            {newsData?.richText}
+          </Markdown>
         </div>
         <NewsSidebar data={newsData} />
       </div>
