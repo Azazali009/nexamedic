@@ -28,6 +28,7 @@ export default function ContactSupport({ data }) {
           {socialBlock?.icons?.map((item) => {
             return (
               <Link
+                target="_blank"
                 className="duration-300 hover:scale-105"
                 key={item?.id}
                 href={item?.url}
