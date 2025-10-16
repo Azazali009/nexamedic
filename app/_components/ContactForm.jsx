@@ -39,7 +39,9 @@ export default function ContactForm({ data }) {
         setErrorMessage(res?.errors?.map((error) => error?.message));
       } else {
         setErrorMessage(null);
-        setSuccessMessage("Congratulation! Form submitted.");
+        setSuccessMessage(
+          "Thank you for submitting. We will get back to you within 24 hours.",
+        );
         if (formRef.current) {
           formRef.current.reset();
         }
@@ -76,7 +78,7 @@ export default function ContactForm({ data }) {
         <Markdown>{data?.description}</Markdown>
       </div>
       <FormErrorMessage errorMessage={errorMessage} />
-      <FormSuccessMessage successMessage={successMessage} />
+
       <form
         // action={(formData) => handleSubmit(formData)}
         onSubmit={(e) => {
@@ -87,8 +89,9 @@ export default function ContactForm({ data }) {
         className="!mt-6 grid grid-cols-2 gap-x-4 gap-y-4 sm:!mt-12 sm:gap-y-6"
         ref={formRef}
       >
-        <FormRow label="First name">
+        <FormRow label="First name *">
           <input
+            required
             id="firstName"
             type="text"
             name="firstName"
@@ -107,8 +110,9 @@ export default function ContactForm({ data }) {
             className="min-h-6 rounded-md border border-[#D9D9D9] bg-white px-4 placeholder:text-[11px] placeholder:text-[#A4ADB3] focus:border-[#D9D9D9] focus:outline-none sm:h-12 sm:rounded-2xl sm:placeholder:text-lg"
           />
         </FormRow>
-        <FormRow label="Email" extendCols={2}>
+        <FormRow label="Email *" extendCols={2}>
           <input
+            required
             id="email"
             type="email"
             name="email"
@@ -117,8 +121,9 @@ export default function ContactForm({ data }) {
             className="min-h-6 rounded-md border border-[#D9D9D9] bg-white px-4 placeholder:text-[11px] placeholder:text-[#A4ADB3] focus:border-[#D9D9D9] focus:outline-none sm:h-12 sm:rounded-2xl sm:placeholder:text-lg"
           />
         </FormRow>
-        <FormRow label="Company" extendCols={2}>
+        <FormRow label="Company *" extendCols={2}>
           <input
+            required
             id="company"
             type="text"
             name="company"
@@ -135,8 +140,9 @@ export default function ContactForm({ data }) {
             className="min-h-6 rounded-md border border-[#D9D9D9] bg-white px-4 placeholder:text-[11px] placeholder:text-[#A4ADB3] focus:border-[#D9D9D9] focus:outline-none sm:h-12 sm:rounded-2xl sm:placeholder:text-lg"
           />
         </FormRow>
-        <FormRow label="Interested in" extendCols={2}>
+        <FormRow label="Interested in *" extendCols={2}>
           <input
+            required
             id="InterestedIn"
             type="text"
             name="InterestedIn"
@@ -154,6 +160,7 @@ export default function ContactForm({ data }) {
         </FormRow>
         <div className="[grid-column:1/-1] flex items-center gap-2">
           <input
+            required
             name="isAgreeWithPrivacyPolicy"
             className="border-gray-secondary accent-primary checked:border-primary checked:bg-primary h-[1.1rem] w-[1.1rem] cursor-pointer appearance-none rounded-xs border bg-white transition duration-150"
             type="checkbox"
@@ -171,6 +178,7 @@ export default function ContactForm({ data }) {
         >
           {isPending ? "sending..." : "Send message"}
         </button>
+        <FormSuccessMessage successMessage={successMessage} />
       </form>
     </div>
   );
