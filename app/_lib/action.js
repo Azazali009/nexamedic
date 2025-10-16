@@ -33,7 +33,7 @@ export async function contactData(formData) {
     },
   );
   const resBody = await res.json();
-  console.log(resBody);
+  
   if (resBody?.error && resBody?.error?.name === "ValidationError") {
     return { errors: resBody?.error?.details.errors };
   }

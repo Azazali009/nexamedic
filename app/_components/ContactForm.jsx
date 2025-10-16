@@ -8,6 +8,7 @@ import FormSuccessMessage from "./FormSuccessMessage";
 import Markdown from "react-markdown";
 import { useSplitTitleAnimation } from "../_gsap/useSplitTitleAnimation";
 import { useSplitLinesAnimation } from "../_gsap/useSplitLineAnimation";
+import emailjs from "@emailjs/browser";
 
 export default function ContactForm({ data }) {
   const formRef = useRef();
@@ -17,6 +18,21 @@ export default function ContactForm({ data }) {
 
   function handleSubmit(formData) {
     startTransition(async () => {
+      // 1) send data to email
+      const resEmailJs = await emailjs.sendForm(
+        "service_65qzo37",
+        "template_ml3udel",
+        formRef.current,
+        {
+          publicKey: "P52HfsYa2qxaxU2qg",
+        },
+      );
+
+      if (resEmailJs?.status === 200) {
+        setSuccessMessage("Congratulation! Form submitted.");
+      }
+
+      // send form data to strapi
       const res = await contactData(formData);
       if (res?.errors) {
         setSuccessMessage(null);
@@ -30,7 +46,7 @@ export default function ContactForm({ data }) {
         // 🕒 Set it back to null after 5 seconds
         setTimeout(() => {
           setSuccessMessage(null);
-        }, 3000);
+        }, 5000);
       }
     });
   }
@@ -52,6 +68,7 @@ export default function ContactForm({ data }) {
     delay: 0.5,
     stagger: 0.05,
   });
+
   return (
     <div className="bg-gray-background space-y-3 rounded-2xl px-6 py-12 sm:space-y-6">
       <h1 className="title text-2xl sm:text-5xl">{data?.title}</h1>
