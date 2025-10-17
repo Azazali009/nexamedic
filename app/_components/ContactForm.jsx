@@ -67,11 +67,11 @@ export default function ContactForm({ data }) {
 
       // 2️⃣ Agar Strapi successful hai => ab email bhejo
       const resEmailJs = await emailjs.sendForm(
-        "service_ouivivu",
+        "service_bwwmqxa",
         "template_jliebrm",
         formRef.current,
         {
-          publicKey: "P52HfsYa2qxaxU2qg",
+          publicKey: "UIV64u0gvw8hfP01P",
         },
       );
 
