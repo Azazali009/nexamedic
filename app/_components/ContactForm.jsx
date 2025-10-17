@@ -184,8 +184,9 @@ export default function ContactForm({ data }) {
             className="min-h-6 rounded-md border border-[#D9D9D9] bg-white px-4 placeholder:text-[11px] placeholder:text-[#A4ADB3] focus:border-[#D9D9D9] focus:outline-none sm:h-12 sm:rounded-2xl sm:placeholder:text-lg"
           />
         </FormRow>
-        <FormRow label="Phone number" extendCols={2}>
+        <FormRow label="Phone number *" extendCols={2}>
           <input
+            required
             id="phoneNumber"
             type="tel"
             name="phone"
@@ -193,9 +194,8 @@ export default function ContactForm({ data }) {
             className="min-h-6 rounded-md border border-[#D9D9D9] bg-white px-4 placeholder:text-[11px] placeholder:text-[#A4ADB3] focus:border-[#D9D9D9] focus:outline-none sm:h-12 sm:rounded-2xl sm:placeholder:text-lg"
           />
         </FormRow>
-        <FormRow label="Interested in *" extendCols={2}>
+        <FormRow label="Interested in " extendCols={2}>
           <input
-            required
             id="InterestedIn"
             type="text"
             name="InterestedIn"

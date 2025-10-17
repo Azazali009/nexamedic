@@ -25,11 +25,11 @@ export default function ProductCard({ product }) {
         <h3 className="text-xl font-semibold capitalize">
           {product?.productTitle}
         </h3>
-        {product?.categories?.length > 0 && (
+        {/* {product?.categories?.length > 0 && (
           <p className="text-sm capitalize">
             {product?.categories?.map((cat) => cat?.name)}
           </p>
-        )}
+        )} */}
         {/* {product?.partners?.length > 0 && (
           <p className="text-base capitalize">
             {product?.partners?.map((partner) => partner?.name)}

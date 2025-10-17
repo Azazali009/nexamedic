@@ -10,12 +10,12 @@ export default function CopyrightText() {
       <ul className="-order-1 flex w-full flex-wrap items-center justify-between gap-2 sm:order-1">
         <li className="relative">
           <Link className="underline-hover" href={"#"}>
-            LinkdIn
+            LinkedIn
           </Link>
         </li>
         <li className="relative">
           <Link className="underline-hover" href={"#"}>
-            Vimeo
+            Youtube
           </Link>
         </li>
         <li className="relative">
