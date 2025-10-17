@@ -18,6 +18,8 @@ export default function AnimatedSearch({ isHome }) {
     return new Fuse(products, {
       keys: [
         "title",
+        "slug",
+        "productTitle",
         "description",
         "tags.name", // if tags is an array of objects
         "categories.slug", // if categories is also array of objects
