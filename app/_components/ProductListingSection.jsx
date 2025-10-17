@@ -25,7 +25,13 @@ export default function ProductListingSection({ products }) {
 
   return (
     <div className="text-darkblue mt-20">
-      <h1 className="text-3xl sm:text-6xl md:ml-[276px]">Products</h1>
+      <h1
+        className={`text-3xl capitalize ${filterSelectedValues?.length >= 3 ? "sm:text-3xl" : "sm:text-6xl"} md:ml-[276px]`}
+      >
+        {filterSelectedValues?.length > 0
+          ? filterSelectedValues?.join(" / ")
+          : "Products"}
+      </h1>
       <div className="my-10 mb-48 grid grid-cols-1 items-start gap-4 sm:my-20 md:grid-cols-[250px_1fr]">
         <ToggleFilter setShowFlter={setShowFlter} />
         <ProductFilterSidebar showFilter={showFilter} />

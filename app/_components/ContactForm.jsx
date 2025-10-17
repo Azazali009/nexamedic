@@ -16,9 +16,56 @@ export default function ContactForm({ data }) {
   const [successMessage, setSuccessMessage] = useState(null);
   const [isPending, startTransition] = useTransition();
 
-  function handleSubmit(formData) {
-    startTransition(async () => {
-      // 1) send data to email
+  // function handleSubmit(formData) {
+  //   startTransition(async () => {
+  //     // 1) send data to email
+  //     const resEmailJs = await emailjs.sendForm(
+  //       "service_65qzo37",
+  //       "template_ml3udel",
+  //       formRef.current,
+  //       {
+  //         publicKey: "P52HfsYa2qxaxU2qg",
+  //       },
+  //     );
+
+  //     if (resEmailJs?.status === 200) {
+  //       setSuccessMessage("Thank you for submitting. We will get back to you within 24 hours.");
+  //     }
+
+  //     // send form data to strapi
+  //     const res = await contactData(formData);
+  //     if (res?.errors) {
+  //       setSuccessMessage(null);
+  //       setErrorMessage(res?.errors?.map((error) => error?.message));
+  //     } else {
+  //       setErrorMessage(null);
+  //       setSuccessMessage(
+  //         "Thank you for submitting. We will get back to you within 24 hours.",
+  //       );
+  //       if (formRef.current) {
+  //         formRef.current.reset();
+  //       }
+  //       // 🕒 Set it back to null after 5 seconds
+  //       setTimeout(() => {
+  //         setSuccessMessage(null);
+  //       }, 5000);
+  //     }
+  //   });
+  // }
+
+  async function submitHandler(formData) {
+    try {
+      // 1️⃣ Pehle: send data to Strapi
+      const res = await contactData(formData);
+
+      if (res?.errors) {
+        // ❌ Strapi me error => email mat bhejo
+        setErrorMessage(res?.errors?.map((error) => error?.message));
+        setSuccessMessage(null);
+        return; // stop here
+      }
+
+      // 2️⃣ Agar Strapi successful hai => ab email bhejo
       const resEmailJs = await emailjs.sendForm(
         "service_65qzo37",
         "template_ml3udel",
@@ -29,27 +76,34 @@ export default function ContactForm({ data }) {
       );
 
       if (resEmailJs?.status === 200) {
-        setSuccessMessage("Congratulation! Form submitted.");
-      }
-
-      // send form data to strapi
-      const res = await contactData(formData);
-      if (res?.errors) {
-        setSuccessMessage(null);
-        setErrorMessage(res?.errors?.map((error) => error?.message));
-      } else {
         setErrorMessage(null);
         setSuccessMessage(
           "Thank you for submitting. We will get back to you within 24 hours.",
         );
+
+        // Reset form after success
         if (formRef.current) {
           formRef.current.reset();
         }
-        // 🕒 Set it back to null after 5 seconds
+
+        // 🕒 Hide message after 5s
         setTimeout(() => {
           setSuccessMessage(null);
         }, 5000);
+      } else {
+        throw new Error("Email sending failed");
       }
+    } catch (error) {
+      // ✅ Common error catch (network / validation / email issues)
+      console.error("Form submission error:", error);
+      setSuccessMessage(null);
+      setErrorMessage(["Something went wrong. Please try again later."]);
+    }
+  }
+
+  function handleSubmit(formData) {
+    startTransition(async () => {
+      await submitHandler(formData);
     });
   }
 
@@ -77,7 +131,6 @@ export default function ContactForm({ data }) {
       <div className="description text-xs sm:text-xl">
         <Markdown>{data?.description}</Markdown>
       </div>
-      <FormErrorMessage errorMessage={errorMessage} />
 
       <form
         // action={(formData) => handleSubmit(formData)}
@@ -179,6 +232,7 @@ export default function ContactForm({ data }) {
         >
           {isPending ? "sending..." : "Send message"}
         </button>
+        <FormErrorMessage errorMessage={errorMessage} />
         <FormSuccessMessage successMessage={successMessage} />
       </form>
     </div>

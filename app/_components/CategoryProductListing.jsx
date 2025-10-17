@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CategoryFilterSidebar from "./CategoryFilterSidebar";
 import ProductGrid from "./ProductGrid";
 import ToggleFilter from "./ToggleFilter";
@@ -25,9 +25,16 @@ export default function CategoryProductListing({ products, slug }) {
     );
   });
 
+  useEffect(() => {
+    setFilterSelectedValues([slug]);
+  }, []);
   return (
     <div className="mt-20">
-      <h1 className="text-3xl capitalize sm:text-5xl md:ml-[276px]">{slug}</h1>
+      <h1 className="text-3xl capitalize sm:text-5xl md:ml-[276px]">
+        {filterSelectedValues?.length > 0
+          ? filterSelectedValues?.join(" / ")
+          : "Products"}
+      </h1>
       <div className="my-10 mb-48 grid grid-cols-1 items-start gap-4 sm:my-20 md:grid-cols-[250px_1fr]">
         <ToggleFilter setShowFlter={setShowFlter} />
         <CategoryFilterSidebar showFilter={showFilter} />

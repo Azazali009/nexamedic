@@ -18,7 +18,9 @@ export default function AutoSwiperSlider({
   }
   return (
     <Swiper
-      grabCursor={true}
+      grabCursor={false}
+      allowTouchMove={false}
+      simulateTouch={false}
       loop={true}
       dir={direction}
       autoplay={{ delay: 0, disableOnInteraction: false }}
@@ -35,13 +37,13 @@ export default function AutoSwiperSlider({
       {extendedImages?.map((slide, index) => (
         <SwiperSlide key={index}>
           {/* <div className={`mx-auto h-[50px] w-[50px] overflow-hidden`}> */}
-          <div className="flex items-center justify-center max-h-[88px] md:max-h-[100px] xl:max-h-[120px] 2xl:max-h-[150px]">
+          <div className="flex max-h-[88px] items-center justify-center md:max-h-[100px] xl:max-h-[120px] 2xl:max-h-[150px]">
             <Image
               width={500}
               height={500}
               src={getImageUrl(slide?.image)}
               alt={slide?.image?.name}
-              className="object-contain w-[55%] h-full"
+              className="h-full w-[55%] object-contain"
               priority={index < 5}
             />
           </div>
