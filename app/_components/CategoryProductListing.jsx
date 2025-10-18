@@ -34,7 +34,7 @@ export default function CategoryProductListing({ products, slug }) {
   return (
     <div className="mt-20">
       <h1
-        className={`text-3xl capitalize sm:text-5xl md:ml-[276px] ${filterSelectedValues?.length >= 3 ? "sm:text-3xl" : "sm:text-6xl"}`}
+        className={`text-3xl capitalize ${filterSelectedValues?.length >= 3 ? "sm:text-3xl" : "sm:text-6xl"} md:ml-[276px]`}
       >
         {filterSelectedValues?.length > 0
           ? filterSelectedValues?.join(" / ")
