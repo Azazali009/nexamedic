@@ -9,7 +9,7 @@ export default function CategoryProductListing({ products, slug }) {
   if (!slug) return <p>Loading...</p>;
 
   const [showFilter, setShowFlter] = useState(false);
-  const { filterSelectedValues, setFilterSelectedValues } = useFilter();
+  const { filterSelectedValues } = useFilter();
 
   //  If no filter, show all
   const selectedFilters =

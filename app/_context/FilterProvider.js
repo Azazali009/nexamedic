@@ -25,18 +25,6 @@ export default function FilterProvider({ children }) {
     ? pathname.split("/categories/")[1]?.split("/")[0]
     : null;
 
-  // ✅ Set slug as default filter
-  // useEffect(() => {
-  //   if (
-  //     pathname.startsWith("/categories/") &&
-  //     categorySlug &&
-  //     filterSelectedValues.length === 0 &&
-  //     !hasUserInteracted // ✅ block auto-apply if user acted
-  //   ) {
-  //     setFilterSelectedValues([categorySlug]);
-  //   }
-  // }, [pathname, categorySlug, filterSelectedValues, hasUserInteracted]);
-
   // ✅ Set slug as default filter when user visits a category page
   useEffect(() => {
     if (
@@ -48,6 +36,13 @@ export default function FilterProvider({ children }) {
       setFilterSelectedValues([categorySlug]); // <-- ab sirf yeh slug rakho
     }
   }, [pathname, categorySlug, filterSelectedValues, hasUserInteracted]);
+
+  // jab bhi category slug change ho → user interaction reset karo
+  useEffect(() => {
+    if (pathname.startsWith("/categories/") && categorySlug) {
+      setHasUserInteracted(false);
+    }
+  }, [categorySlug]);
 
   // Reset filter when user leaves the category page
   useEffect(() => {

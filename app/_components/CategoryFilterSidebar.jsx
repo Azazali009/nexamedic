@@ -9,7 +9,7 @@ export default function ProductFilterSidebar({ showFilter }) {
   const handleRemove = (label) => {
     setFilterSelectedValues((prev) => prev.filter((val) => val !== label));
   };
-
+  console.log(filterSelectedValues);
   return (
     <>
       {/* ✅ For small screens - Animated */}
@@ -25,37 +25,22 @@ export default function ProductFilterSidebar({ showFilter }) {
           >
             <h3 className="mb-10 font-semibold tracking-tight">Filter</h3>
             <div className="flex flex-wrap items-center gap-2">
-              {!filterSelectedValues || filterSelectedValues?.length === 0 ? (
-                <div
-                  key={filter}
-                  className="bg-primary flex items-center gap-2 rounded-full px-3 py-1 text-[10px] text-white"
-                >
-                  <span>azaz</span>
-                  <button
-                    onClick={() => handleRemove(filter)}
-                    className="cursor-pointer text-base"
+              {filterSelectedValues?.map((filter) => {
+                return (
+                  <div
+                    key={filter}
+                    className="bg-primary flex items-center gap-2 rounded-full px-3 py-1 text-[10px] text-white"
                   >
-                    &times;
-                  </button>
-                </div>
-              ) : (
-                filterSelectedValues?.map((filter) => {
-                  return (
-                    <div
-                      key={filter}
-                      className="bg-primary flex items-center gap-2 rounded-full px-3 py-1 text-[10px] text-white"
+                    <span>{filter}</span>
+                    <button
+                      onClick={() => handleRemove(filter)}
+                      className="cursor-pointer text-base"
                     >
-                      <span>{filter}</span>
-                      <button
-                        onClick={() => handleRemove(filter)}
-                        className="cursor-pointer text-base"
-                      >
-                        &times;
-                      </button>
-                    </div>
-                  );
-                })
-              )}
+                      &times;
+                    </button>
+                  </div>
+                );
+              })}
             </div>
             <CategoriesFilters />
             <BrandFilters />
