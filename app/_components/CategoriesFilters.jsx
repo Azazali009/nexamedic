@@ -12,7 +12,7 @@ export default function CategoriesFilters() {
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between">
-        <h3 className="font-semibold">Categories</h3>
+        <h3 className="font-semibold">Portfolio</h3>
 
         <button className="bg-primary flex size-6 items-center justify-center rounded-full text-white">
           -
