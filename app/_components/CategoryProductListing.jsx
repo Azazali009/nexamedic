@@ -6,6 +6,8 @@ import ToggleFilter from "./ToggleFilter";
 import { useFilter } from "../_context/FilterProvider";
 
 export default function CategoryProductListing({ products, slug }) {
+  if (!slug) return <p>Loading...</p>;
+
   const [showFilter, setShowFlter] = useState(false);
   const { filterSelectedValues, setFilterSelectedValues } = useFilter();
 
@@ -28,7 +30,7 @@ export default function CategoryProductListing({ products, slug }) {
   useEffect(() => {
     setFilterSelectedValues(slug ? [slug] : []);
   }, [slug]);
-
+  console.log(filterSelectedValues);
   return (
     <div className="mt-20">
       <h1

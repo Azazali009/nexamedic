@@ -4,7 +4,6 @@ import { useNav } from "../_context/NavProvider";
 
 export default function SubMenu() {
   const {
-    setMenuLevel,
     mainNavActiveItem,
     categories,
     partners,
