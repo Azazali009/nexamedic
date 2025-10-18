@@ -27,10 +27,10 @@ export default function CategoryProductListing({ products, slug }) {
     );
   });
 
-  useEffect(() => {
-    setFilterSelectedValues(slug ? [slug] : []);
-  }, [slug]);
-  console.log(filterSelectedValues);
+  // useEffect(() => {
+  //   setFilterSelectedValues(slug ? [slug] : []);
+  // }, [slug]);
+
   return (
     <div className="mt-20">
       <h1
