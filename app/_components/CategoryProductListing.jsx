@@ -27,10 +27,17 @@ export default function CategoryProductListing({ products, slug }) {
 
   // ✅ initialize default filter once if empty
   useEffect(() => {
-    if (slug && filterSelectedValues.length === 0) {
-      setFilterSelectedValues([slug]);
-    }
-  }, [slug, filterSelectedValues, setFilterSelectedValues]);
+    // ✅ run only once on mount
+    setFilterSelectedValues((prev) => {
+      // agar already user ke filters hain, unhe preserve karo
+      if (prev && prev.length > 0) return prev;
+
+      // agar empty hai, tabhi slug se default set karo
+      return slug ? [slug] : [];
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // 👈 dependency array empty rakho!
+
   return (
     <div className="mt-20">
       <h1
