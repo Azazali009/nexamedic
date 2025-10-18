@@ -1,9 +1,8 @@
 "use client";
 
-import Link from "next/link";
+import Markdown from "react-markdown";
 import { useNav } from "../_context/NavProvider";
 import LineSkeleton from "./LineSkeleton";
-import Markdown from "react-markdown";
 
 export default function FooterAddressCol() {
   const { footerData } = useNav();
