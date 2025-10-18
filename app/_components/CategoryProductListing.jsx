@@ -25,9 +25,12 @@ export default function CategoryProductListing({ products, slug }) {
     );
   });
 
+  // ✅ initialize default filter once if empty
   useEffect(() => {
-    setFilterSelectedValues([slug]);
-  }, []);
+    if (slug && filterSelectedValues.length === 0) {
+      setFilterSelectedValues([slug]);
+    }
+  }, [slug, filterSelectedValues, setFilterSelectedValues]);
   return (
     <div className="mt-20">
       <h1
