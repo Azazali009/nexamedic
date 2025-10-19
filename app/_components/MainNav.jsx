@@ -8,12 +8,12 @@ export default function MainNav() {
 
   function handleClick(item) {
     if (
-      item?.name?.toLowerCase() === "categories" ||
+      item?.name?.toLowerCase() === "portfolio" ||
       item?.name?.toLowerCase() === "partners"
     ) {
       setMenuLevel("submenu");
-      if (item?.name?.toLowerCase() === "categories")
-        setMainNavActiveItem("categories");
+      if (item?.name?.toLowerCase() === "portfolio")
+        setMainNavActiveItem("portfolio");
       if (item?.name?.toLowerCase() === "partners")
         setMainNavActiveItem("partners");
     } else handleMenu();
