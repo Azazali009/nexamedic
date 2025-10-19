@@ -574,7 +574,7 @@ export function VideoSuper({
 
   return (
     <>
-      <div id="company-intro-scene" className="home-reel-video relative">
+      <div id="company-intro-scene" className="home-reel-video">
         <button
           onClick={() => setIsVisible(!isVisible)}
           id="home-reel-video-watch-btn"
