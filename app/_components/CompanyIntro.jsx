@@ -32,7 +32,7 @@ export default function CompanyIntro({ data }) {
     delay: 0.5,
   });
   return (
-    <section ref={companyIntroRef} className="company-intro">
+    <section ref={companyIntroRef} className="company-intro relative !z-[9999]">
       <XParticles />
       <div
         id="company-intro"
