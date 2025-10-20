@@ -125,8 +125,8 @@ export default function VideoGsap() {
 
     const resetVideo = () => {
       gsap.to(videoWrapper, {
-        width: "60vw",
-        height: "35vh",
+        width: "55vw",
+        height: "auto",
         duration: 0.8,
         ease: "power2.out",
       });
@@ -192,8 +192,8 @@ export default function VideoGsap() {
 
         if (videoWrapper) {
           gsap.set(videoWrapper, {
-            width: "60vw",
-            height: "35vh",
+            width: "55vw",
+            height: "auto",
             clearProps: "x,y,top,left,right,bottom,position",
           });
         }
@@ -268,7 +268,7 @@ export default function VideoGsap() {
     >
       <div
         ref={videoWrapperRef}
-        className="relative z-[60] aspect-[16/9] h-[35vh] w-[60vw] overflow-hidden"
+        className="relative z-[60] w-[55vw] overflow-hidden"
         style={{
           transition: "all 0.8s ease-out",
           ["--radius"]: "24px",
