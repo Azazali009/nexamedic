@@ -10,7 +10,6 @@ export default function Header() {
   const isCareer = pathname === "/career";
   const { scrolled, isVideoFullscreen } = useNav();
 
-  // Hide header when video is in fullscreen
   if (isVideoFullscreen) {
     return null;
   }
