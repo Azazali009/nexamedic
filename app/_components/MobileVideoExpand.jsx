@@ -14,88 +14,104 @@ const MobileVideoExpand = () => {
   const { setIsVideoFullscreen } = useNav();
 
   const videoRef = useRef(null);
+  const scrollRef = useRef({ y: 0, applied: false });
+  const prevEnvRef = useRef({
+    htmlBg: "",
+    bodyBg: "",
+    mobileBg: "",
+    sectionBg: "",
+    themeColor: "",
+  });
 
   useEffect(() => {
     // Hide/show header using context
     setIsVideoFullscreen(isExpanded);
 
-    // 🟢 Change browser theme color dynamically
-    const color = isExpanded ? "#000000" : "#ffffff";
-
-    // Update or create theme-color meta tag
+    // 🟢 Change theme color & backgrounds while preserving previous values
+    const color = "#000000";
     let metaThemeColor = document.querySelector('meta[name="theme-color"]');
     if (!metaThemeColor) {
       metaThemeColor = document.createElement("meta");
       metaThemeColor.name = "theme-color";
       document.head.appendChild(metaThemeColor);
     }
-    metaThemeColor.setAttribute("content", color);
 
-    // ✅ FORCE update by removing and re-adding (helps with landscape)
-    const parent = metaThemeColor.parentNode;
-    parent.removeChild(metaThemeColor);
-    parent.appendChild(metaThemeColor);
-
-    // Change page background
-    document.documentElement.style.backgroundColor = color;
-    document.body.style.backgroundColor = color;
-
-    // ✅ CRITICAL: Set background on video containers
     const videoMobile = document.querySelector(".video-mobile");
-    if (videoMobile) {
-      videoMobile.style.backgroundColor = color;
-    }
-
     const videoSection = document.querySelector(".video-section");
-    if (videoSection) {
-      videoSection.style.backgroundColor = color;
+
+    if (isExpanded) {
+      // save previous
+      prevEnvRef.current.htmlBg = document.documentElement.style.backgroundColor || "";
+      prevEnvRef.current.bodyBg = document.body.style.backgroundColor || "";
+      prevEnvRef.current.mobileBg = videoMobile ? videoMobile.style.backgroundColor : "";
+      prevEnvRef.current.sectionBg = videoSection ? videoSection.style.backgroundColor : "";
+      prevEnvRef.current.themeColor = metaThemeColor.getAttribute("content") || "";
+
+      // apply dark env
+      metaThemeColor.setAttribute("content", color);
+      const parent = metaThemeColor.parentNode;
+      parent.removeChild(metaThemeColor);
+      parent.appendChild(metaThemeColor);
+
+      document.documentElement.style.backgroundColor = color;
+      document.body.style.backgroundColor = color;
+      if (videoMobile) videoMobile.style.backgroundColor = color;
+      if (videoSection) videoSection.style.backgroundColor = color;
+    } else {
+      // restore previous precisely
+      metaThemeColor.setAttribute("content", prevEnvRef.current.themeColor);
+      const parent = metaThemeColor.parentNode;
+      parent.removeChild(metaThemeColor);
+      parent.appendChild(metaThemeColor);
+
+      document.documentElement.style.backgroundColor = prevEnvRef.current.htmlBg;
+      document.body.style.backgroundColor = prevEnvRef.current.bodyBg;
+      if (videoMobile) videoMobile.style.backgroundColor = prevEnvRef.current.mobileBg;
+      if (videoSection) videoSection.style.backgroundColor = prevEnvRef.current.sectionBg;
     }
     // 🔒 Robust scroll lock on mobile (iOS-safe)
-    let previousOverflow = "";
-    let previousHtmlOverflow = "";
-    let previousPosition = "";
-    let previousTop = "";
-    let previousWidth = "";
-    let scrollY = 0;
-
-    const preventTouchScroll = (e) => {
+    const preventDefault = (e) => {
       e.preventDefault();
     };
 
     try {
-      if (isExpanded) {
-        scrollY = window.scrollY || window.pageYOffset || 0;
-        previousOverflow = document.body.style.overflow;
-        previousHtmlOverflow = document.documentElement.style.overflow;
-        previousPosition = document.body.style.position;
-        previousTop = document.body.style.top;
-        previousWidth = document.body.style.width;
+      if (isExpanded && !scrollRef.current.applied) {
+        const y = window.scrollY || window.pageYOffset || 0;
+        scrollRef.current.y = y;
+        scrollRef.current.applied = true;
 
-        document.body.style.overflow = "hidden";
         document.documentElement.style.overflow = "hidden";
+        document.documentElement.style.overscrollBehavior = "none";
+        document.body.style.overflow = "hidden";
         document.body.style.position = "fixed";
-        document.body.style.top = `-${scrollY}px`;
+        document.body.style.top = `-${y}px`;
         document.body.style.width = "100%";
+        document.body.style.touchAction = "none";
 
-        document.addEventListener("touchmove", preventTouchScroll, {
-          passive: false,
-        });
-      } else {
-        // restore
-        const y = parseInt((document.body.style.top || "0").replace("-", "")) || 0;
-        document.body.style.overflow = previousOverflow;
-        document.documentElement.style.overflow = previousHtmlOverflow;
-        document.body.style.position = previousPosition;
-        document.body.style.top = previousTop;
-        document.body.style.width = previousWidth;
+        window.addEventListener("wheel", preventDefault, { passive: false });
+        window.addEventListener("touchmove", preventDefault, { passive: false });
+      }
+
+      if (!isExpanded && scrollRef.current.applied) {
+        const y = scrollRef.current.y || 0;
+        document.documentElement.style.overflow = "";
+        document.documentElement.style.overscrollBehavior = "";
+        document.body.style.overflow = "";
+        document.body.style.position = "";
+        document.body.style.top = "";
+        document.body.style.width = "";
+        document.body.style.touchAction = "";
+
+        window.removeEventListener("wheel", preventDefault);
+        window.removeEventListener("touchmove", preventDefault);
         window.scrollTo(0, y);
-
-        document.removeEventListener("touchmove", preventTouchScroll);
+        scrollRef.current.applied = false;
       }
     } catch (_) {}
 
     return () => {
-      document.removeEventListener("touchmove", preventTouchScroll);
+      window.removeEventListener("wheel", preventDefault);
+      window.removeEventListener("touchmove", preventDefault);
     };
   }, [isExpanded, setIsVideoFullscreen]);
 
@@ -159,21 +175,7 @@ const MobileVideoExpand = () => {
       document.documentElement.style.overflow = "";
     } catch (_) {}
 
-    // Restore theme/background instantly (no need to wait for effect)
-    try {
-      let metaThemeColor = document.querySelector('meta[name="theme-color"]');
-      if (!metaThemeColor) {
-        metaThemeColor = document.createElement("meta");
-        metaThemeColor.name = "theme-color";
-        document.head.appendChild(metaThemeColor);
-      }
-      metaThemeColor.setAttribute("content", "#ffffff");
-      const parent = metaThemeColor.parentNode;
-      parent.removeChild(metaThemeColor);
-      parent.appendChild(metaThemeColor);
-      document.documentElement.style.backgroundColor = "#ffffff";
-      document.body.style.backgroundColor = "#ffffff";
-    } catch (_) {}
+    // theme restoration is handled in the isExpanded effect
   };
 
   // 🟢 Toggle play/pause
