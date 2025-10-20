@@ -769,6 +769,37 @@ body {
 }
 
 @media (max-width: 768px) {
+  /* Ensure Our Values title is always visible on mobile */
+  #our-value-gsap-title {
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+    display: block !important;
+    position: relative !important;
+    z-index: 10 !important;
+  }
+  
+  /* Ensure Our Values title stays visible even when video is expanded */
+  .video-mobile.fixed #our-value-gsap-title {
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+    display: block !important;
+    position: relative !important;
+    z-index: 10 !important;
+  }
+  
+  /* Ensure video modal is always on top */
+  .video-modal {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    z-index: 2147483647 !important;
+    background: black !important;
+  }
+  
   #home-reel-video-close {
     opacity: 1;
     pointer-events: all;

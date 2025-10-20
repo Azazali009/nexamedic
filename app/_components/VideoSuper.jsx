@@ -445,6 +445,7 @@ export function VideoSuper({
     setIsVideoFullscreen(isVisible);
   }, [isVisible, setIsVideoFullscreen]);
 
+
   const handleSeek = (e) => {
     const video = videoRef.current;
     const progressBar = progressBarRef.current;
