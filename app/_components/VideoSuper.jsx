@@ -4,6 +4,7 @@ import { Canvas, useLoader, useThree } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import * as THREE from "three";
 import dynamic from "next/dynamic";
+import { useNav } from "../_context/NavProvider";
 
 const loadGSAP = async () => {
   try {
@@ -437,6 +438,12 @@ export function VideoSuper({
   const buttonRef = useRef();
   const videoRef = useRef();
   const progressBarRef = useRef();
+  const { setIsVideoFullscreen } = useNav();
+
+  // Update context when video visibility changes (custom fullscreen mode)
+  useEffect(() => {
+    setIsVideoFullscreen(isVisible);
+  }, [isVisible, setIsVideoFullscreen]);
 
   const handleSeek = (e) => {
     const video = videoRef.current;

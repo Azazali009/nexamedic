@@ -723,7 +723,8 @@ body {
 }
 
 #home-reel-video-close {
-  /* opacity: 0; */
+  opacity: 0;
+  pointer-events: none;
   cursor: pointer;
   position: absolute;
   top: 16px;
@@ -738,6 +739,7 @@ body {
   cursor: pointer;
   color: #fff;
   font-size: 32px;
+  transition: opacity 0.3s ease;
 }
 
 #home-reel-video-close span {
@@ -777,7 +779,7 @@ body {
 }
 
 @media (max-width: 768px) {
-  #home-reel-video-close {
+  #home-reel-video-video.active #home-reel-video-close {
     opacity: 1;
     pointer-events: all;
   }
