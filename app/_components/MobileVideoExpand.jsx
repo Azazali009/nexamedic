@@ -269,7 +269,7 @@ const MobileVideoExpand = () => {
           {/* 🎥 Video */}
 
           {/* 🎚 Custom Controls */}
-          <div className="absolute bottom-8 left-1/2 z-[103] flex -translate-x-1/2 items-center gap-4 rounded-lg bg-white/30 px-4 py-2 backdrop-blur-sm">
+          <div className="absolute bottom-2 left-1/2 z-[103] flex -translate-x-1/2 items-center gap-4 rounded-lg bg-black/20 px-4 py-2 opacity-30 transition-opacity hover:opacity-70">
             {/* Play / Pause */}
             <button
               onClick={() => {
