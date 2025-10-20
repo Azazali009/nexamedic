@@ -176,6 +176,41 @@ export default function VideoGsap() {
     };
   }, [mounted, userInteracted, setIsVideoFullscreen]);
 
+  // Ensure proper cleanup on orientation or breakpoint change
+  useEffect(() => {
+    const handleViewportChange = () => {
+      const videoWrapper = videoWrapperRef.current;
+      const video = videoRef.current;
+      // If moving to mobile/portrait, kill any ScrollTriggers and reset styles
+      if (window.innerWidth < 768) {
+        try {
+          ScrollTrigger.getAll().forEach((st) => st.kill());
+        } catch (_) {}
+
+        // Reset header visibility
+        setIsVideoFullscreen(false);
+
+        if (videoWrapper) {
+          gsap.set(videoWrapper, {
+            width: "60vw",
+            height: "35vh",
+            clearProps: "x,y,top,left,right,bottom,position",
+          });
+        }
+        if (video) {
+          gsap.set(video, { clearProps: "--radius,scale" });
+        }
+      }
+    };
+
+    window.addEventListener("resize", handleViewportChange);
+    window.addEventListener("orientationchange", handleViewportChange);
+    return () => {
+      window.removeEventListener("resize", handleViewportChange);
+      window.removeEventListener("orientationchange", handleViewportChange);
+    };
+  }, [setIsVideoFullscreen]);
+
   // Progress tracking
   useEffect(() => {
     const video = videoRef.current;
