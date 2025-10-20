@@ -16,6 +16,7 @@ export default function NavProvider({ children }) {
   const [productsByCategory, setProductsByCategory] = useState([]);
   const [footerData, setFooterData] = useState({});
   const [scrolled, setScrolled] = useState(false);
+  const [isVideoFullscreen, setIsVideoFullscreen] = useState(false);
 
   const [mainNavActiveItem, setMainNavActiveItem] = useState("");
 
@@ -145,6 +146,8 @@ export default function NavProvider({ children }) {
         mainNavActiveItem,
         setMainNavActiveItem,
         partners,
+        isVideoFullscreen,
+        setIsVideoFullscreen,
       }}
     >
       {children}
