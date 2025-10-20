@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+
 @theme {
   --breakpoint-xs: 480px;
   --color-primary: #34855b;
@@ -11,20 +12,9 @@
   --color-darkblue: #1c3141;
 }
 body {
-  scroll-behavior: auto;
-  overflow: hidden;
+  scroll-behavior: auto; /* Let Lenis control it */
+  overflow: hidden; /* Optional: to avoid double scroll */
 }
-.company-intro {
-  position: relative;
-  z-index: 0;
-}
-
-.company-intro canvas,
-.company-intro .xparticles {
-  pointer-events: none !important;
-  z-index: 0 !important;
-}
-
 .markdown-content ul {
   list-style-type: disc !important;
   margin-left: 1.5rem;
@@ -779,7 +769,7 @@ body {
 }
 
 @media (max-width: 768px) {
-  #home-reel-video-video.active #home-reel-video-close {
+  #home-reel-video-close {
     opacity: 1;
     pointer-events: all;
   }
@@ -841,4 +831,36 @@ body {
   #company-intro-scene {
     transform: translateX(-50%);
   }
+}
+
+/* globals.css or app.css */
+[bis_skin_checked] {
+  /* This won't remove the attribute but acknowledges it exists */
+}
+
+@media (max-width: 950px) and (max-height: 480px) {
+  .video-section {
+    display: none !important;
+  }
+  .video-mobile.fixed {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999 !important;
+    background: #000 !important;
+    width: 100vw !important;
+    height: 100dvh;
+  }
+  .video-mobile {
+    display: block !important;
+    width: 70% !important;
+    margin: 0 auto;
+    transition: background-color 0.3s ease;
+  }
+}
+.video-mobile,
+.video-section {
+  transition: background-color 0.3s ease;
 }

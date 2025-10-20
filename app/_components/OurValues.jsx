@@ -5,10 +5,15 @@ import { useSplitTitleAnimation } from "../_gsap/useSplitTitleAnimation";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useRef } from "react";
-
+import dynamic from "next/dynamic";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import VideoExpanded from "./VideoExpanded";
-import VideoExpandWidth from "./VideoExpandWidth";
+import VideoGsap from "./VideoGsap";
+
+
+const MobileVideoExpand = dynamic(() => import("./MobileVideoExpand"), {
+  ssr: false,
+});
+
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 export default function OurValues({ data }) {
@@ -38,21 +43,22 @@ export default function OurValues({ data }) {
         >
           {data?.title}
         </h2>
-        <div className="relative mx-auto aspect-video w-full overflow-hidden md:w-[80%]">
-          <video
-            controls={true}
-            preload="auto"
-            poster="/value-poster.webp"
-            className="absolute inset-0 h-full w-full object-cover"
-          >
-            <source src={data?.video?.url} type="video/mp4" />
-          </video>
-        </div>
+      </div>
+      {/* 
+      {orientation === "portrait" ? (
+        <MobileVideoExpand />
+      ) : (
+        // <ClientOnly>
+        <VideoExpanded />
+        // </ClientOnly>
+      )} */}
+      <div className="video-section">
+        <VideoGsap />
       </div>
 
-      {/* <VideoScrub /> */}
-      {/* <VideoExpandWidth /> */}
-      {/* <VideoExpanded /> */}
+      <div className="video-mobile">
+        <MobileVideoExpand />
+      </div>
     </section>
   );
 }

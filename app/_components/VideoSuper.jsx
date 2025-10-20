@@ -533,12 +533,22 @@ export function VideoSuper({
     if (!videoWrapper || !video) return;
 
     if (isVisible) {
+      // lock scroll while reel overlay is visible
+      try {
+        document.body.style.overflow = "hidden";
+        document.documentElement.style.overflow = "hidden";
+      } catch (_) {}
       videoWrapper.classList.add("active");
       setPlay(true);
       video.play().catch((error) => {
         console.warn("Video play failed:", error);
       });
     } else {
+      // restore scroll when overlay closes
+      try {
+        document.body.style.overflow = "";
+        document.documentElement.style.overflow = "";
+      } catch (_) {}
       videoWrapper.classList.remove("active");
       setPlay(false);
       video.pause();
