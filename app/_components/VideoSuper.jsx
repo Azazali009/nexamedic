@@ -533,17 +533,64 @@ export function VideoSuper({
 
     if (!videoWrapper || !video) return;
 
+    // Listen for fullscreen exit to close video modal
+    const handleFullscreenExit = () => {
+      const isFullscreen = document.fullscreenElement || 
+                          document.webkitFullscreenElement || 
+                          document.webkitDisplayingFullscreen;
+      
+      if (!isFullscreen && isVisible) {
+        // User exited fullscreen, close the video modal
+        setIsVisible(false);
+      }
+    };
+
     if (isVisible) {
       videoWrapper.classList.add("active");
       setPlay(true);
-      video.play().catch((error) => {
-        console.warn("Video play failed:", error);
-      });
+      
+      // Check if mobile and trigger fullscreen
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      
+      if (isMobile) {
+        // Trigger fullscreen immediately
+        setTimeout(() => {
+          if (video.webkitEnterFullscreen) {
+            video.webkitEnterFullscreen();
+          } else if (video.requestFullscreen) {
+            video.requestFullscreen().catch(() => {});
+          } else if (video.webkitRequestFullscreen) {
+            video.webkitRequestFullscreen().catch(() => {});
+          }
+          video.play().catch((error) => {
+            console.warn("Video play failed:", error);
+          });
+        }, 100);
+        
+        // Add listeners for when user exits fullscreen
+        video.addEventListener('webkitendfullscreen', handleFullscreenExit);
+        document.addEventListener('fullscreenchange', handleFullscreenExit);
+        document.addEventListener('webkitfullscreenchange', handleFullscreenExit);
+      } else {
+        // Desktop: play normally
+        video.play().catch((error) => {
+          console.warn("Video play failed:", error);
+        });
+      }
     } else {
       videoWrapper.classList.remove("active");
       setPlay(false);
       video.pause();
     }
+
+    // Cleanup listeners
+    return () => {
+      if (video) {
+        video.removeEventListener('webkitendfullscreen', handleFullscreenExit);
+      }
+      document.removeEventListener('fullscreenchange', handleFullscreenExit);
+      document.removeEventListener('webkitfullscreenchange', handleFullscreenExit);
+    };
   }, [isVisible]);
 
   useEffect(() => {
@@ -571,6 +618,7 @@ export function VideoSuper({
       video.pause();
     }
   }, [play, isVisible]);
+
 
 
   useEffect(() => {
@@ -662,9 +710,6 @@ export function VideoSuper({
           } catch (error) {}
         }}
       >
-        <button id="home-reel-video-close" onClick={() => setIsVisible(false)}>
-          <span>×</span>
-        </button>
         <video
           src={src}
           muted={muted}
