@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { useState } from "react";
 import { getImageUrl } from "../_lib/helpers";
+import Link from "next/link";
 
 export default function ContactVideo({ data }) {
   const [show, setShow] = useState(false);
@@ -54,7 +55,8 @@ export default function ContactVideo({ data }) {
         </div>
 
         {/* Floating Button */}
-        <button
+        <Link
+          href={"/contact/map"}
           // onClick={() => setShow((show) => !show)}
           className="!bg-primary button-hover hover:text-primary group relative mb-4 flex cursor-pointer items-center gap-2 overflow-hidden rounded-full px-4 py-2 text-xl font-medium !text-white capitalize transition-all duration-300 hover:scale-95 active:scale-90 2xl:px-6 2xl:py-3 2xl:text-2xl"
         >
@@ -66,7 +68,7 @@ export default function ContactVideo({ data }) {
             alt={data?.cta?.text || "Arrow"}
             src={imageUrl}
           />
-        </button>
+        </Link>
       </div>
 
       {/* show in small screen */}

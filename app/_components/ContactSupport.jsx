@@ -24,7 +24,7 @@ export default function ContactSupport({ data }) {
       {/* Follow */}
       <div className="space-y-3 font-medium">
         <h3 className="text-2xl sm:text-4xl">{socialBlock?.title}</h3>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-4">
           {socialBlock?.icons?.map((item) => {
             return (
               <Link

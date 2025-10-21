@@ -30,11 +30,11 @@ export default function ProductCard({ product }) {
             {product?.categories?.map((cat) => cat?.name)}
           </p>
         )} */}
-        {/* {product?.partners?.length > 0 && (
+        {product?.partners?.length > 0 && (
           <p className="text-base capitalize">
             {product?.partners?.map((partner) => partner?.name)}
           </p>
-        )} */}
+        )}
       </div>
     </div>
   );
