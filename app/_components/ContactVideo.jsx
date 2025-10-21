@@ -57,6 +57,7 @@ export default function ContactVideo({ data }) {
         {/* Floating Button */}
         <Link
           href={"/contact/map"}
+          target="_blank"
           // onClick={() => setShow((show) => !show)}
           className="!bg-primary button-hover hover:text-primary group relative mb-4 flex cursor-pointer items-center gap-2 overflow-hidden rounded-full px-4 py-2 text-xl font-medium !text-white capitalize transition-all duration-300 hover:scale-95 active:scale-90 2xl:px-6 2xl:py-3 2xl:text-2xl"
         >
