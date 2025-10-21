@@ -8,7 +8,11 @@ export default function Header() {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const isCareer = pathname === "/career";
-  const { scrolled } = useNav();
+  const { scrolled, isVideoFullscreen } = useNav();
+
+  if (isVideoFullscreen) {
+    return null;
+  }
 
   return (
     <header

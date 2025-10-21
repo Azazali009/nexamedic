@@ -16,6 +16,16 @@ export const useSplitTitleAnimation = ({
   stagger = 0.02,
 }) => {
   useGSAP(() => {
+    // Don't run animation on mobile devices
+    if (window.innerWidth < 768) {
+      return;
+    }
+
+    // Don't run animation if trigger or titleSelector is null
+    if (!trigger || !titleSelector) {
+      return;
+    }
+
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: trigger,
@@ -29,7 +39,7 @@ export const useSplitTitleAnimation = ({
     });
 
     const title = new SplitText(titleSelector, { type: "lines, words" });
-    // ✅ Fix: make sure wrappers don’t clip hidden words
+    // ✅ Fix: make sure wrappers don't clip hidden words
     gsap.set(title.lines, { overflow: "visible" });
     gsap.set(title.words, { overflow: "visible" });
     const animationProps = {
@@ -45,5 +55,5 @@ export const useSplitTitleAnimation = ({
     else if (direction === "bottom") animationProps.yPercent = 100;
 
     tl.from(title.words, animationProps);
-  }, []);
+  }, [trigger, titleSelector]);
 };

@@ -16,6 +16,11 @@ export const useSplitLinesAnimation = ({
   yPercent = 100,
 }) => {
   useGSAP(() => {
+    // Don't run animation on mobile devices
+    if (window.innerWidth < 768) {
+      return;
+    }
+
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger,
