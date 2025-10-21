@@ -572,6 +572,7 @@ export function VideoSuper({
     }
   }, [play, isVisible]);
 
+
   useEffect(() => {
     const button = buttonRef.current;
     if (!button) return;

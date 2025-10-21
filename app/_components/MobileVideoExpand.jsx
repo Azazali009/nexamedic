@@ -125,17 +125,24 @@ const MobileVideoExpand = () => {
       {/* Modal */}
       {isExpanded && (
         <div 
-          className="fixed inset-0 flex items-center justify-center bg-black"
-          style={{ zIndex: 2147483647 }}
+          className="fixed inset-0 flex items-center justify-center"
+          style={{ 
+            zIndex: 2147483647,
+            backgroundColor: '#f6f2fb',
+            minWidth: '100vw',
+            minHeight: '100vh',
+            maxWidth: '100vw',
+            maxHeight: '100vh'
+          }}
         >
           {/* Close Button */}
           <button
             onClick={handleClose}
-            className="absolute top-6 right-6 flex h-12 w-12 items-center justify-center rounded-full bg-[#2f855a] p-2 shadow-lg"
+            className="absolute top-6 right-6 flex h-12 w-12 items-center justify-center rounded-full bg-[#34855b] shadow-lg"
             style={{ zIndex: 2147483647 }}
             aria-label="Close video"
           >
-            <span className="text-2xl text-white">×</span>
+            <span className="inline-block text-white" style={{ fontSize: '32px', transform: 'translateY(-7%)' }}>×</span>
           </button>
 
           {/* Video */}
