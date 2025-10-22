@@ -28,7 +28,7 @@ export default function CopyrightText() {
           </Link>
         </li>
         <li className="relative">
-          <Link className="underline-hover" href={"#"}>
+          <Link className="underline-hover" href={"/terms"}>
             General terms
           </Link>
         </li>
