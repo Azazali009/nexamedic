@@ -1,18 +1,21 @@
 "use client";
 import React, { useState } from "react";
 
-const MobileVideoExpand = () => {
+const MobileVideoExpand = ({
+  embedId = "wM2AZ7kpNMM",
+  thumbnailUrl = "/thumbnail.jpeg",
+}) => {
   const [isVisible, setIsVisible] = useState(false);
 
   return (
-    <div className="video-mobile md:hidden relative block w-full py-8">
-      <div className="mx-auto flex h-60 w-[85%] items-center justify-center rounded-xl overflow-hidden relative">
+    <div className="relative block w-full md:hidden">
+      <div className="relative mx-auto flex aspect-video items-center justify-center overflow-hidden rounded-xl">
         {isVisible ? (
-          <div className="absolute inset-0 bg-black w-full h-full">
+          <div className="h-full w-full bg-black">
             <iframe
               width="100%"
               height="100%"
-              src={`https://www.youtube.com/embed/wM2AZ7kpNMM${isVisible ? '?autoplay=1' : ''}`}
+              src={`https://www.youtube.com/embed/${embedId}${isVisible ? "?autoplay=1" : ""}`}
               title="YouTube video player"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -20,9 +23,9 @@ const MobileVideoExpand = () => {
             ></iframe>
           </div>
         ) : (
-          <div className="relative w-full h-full">
+          <div className="relative h-full w-full">
             <img
-              src="/thumbnail.jpeg"
+              src={thumbnailUrl}
               alt="Video thumbnail"
               className="h-full w-full object-cover"
             />
@@ -30,7 +33,12 @@ const MobileVideoExpand = () => {
               onClick={() => setIsVisible(true)}
               id="our-values-video-watch-btn"
               aria-label="Watch video"
-              style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+              }}
               className="flex items-center justify-center"
             >
               <div id="our-values-video-watch-btn-base"></div>

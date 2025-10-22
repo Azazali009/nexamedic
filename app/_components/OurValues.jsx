@@ -9,7 +9,6 @@ import dynamic from "next/dynamic";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import VideoGsap from "./VideoGsap";
 
-
 const MobileVideoExpand = dynamic(() => import("./MobileVideoExpand"), {
   ssr: false,
 });
@@ -32,10 +31,13 @@ export default function OurValues({ data }) {
   return (
     <section
       ref={ourValuesRef}
-      className="relative space-y-8 py-20"
+      className="relative mx-auto w-[85%] space-y-8 py-20 lg:w-full"
       id="our-value"
     >
-      <div id="our-values-heading-title" className="mx-auto w-[85%] space-y-20">
+      <div
+        id="our-values-heading-title"
+        className="mx-auto space-y-20 lg:w-[85%]"
+      >
         <h2
           className="our-value-heading-text xs:text-6xl !inline-block !overflow-visible text-3xl"
           id="our-value-gsap-title"
@@ -56,7 +58,7 @@ export default function OurValues({ data }) {
         <VideoGsap />
       </div>
 
-      <div className="video-mobile">
+      <div className="min-[951]:hidden">
         <MobileVideoExpand />
       </div>
     </section>
