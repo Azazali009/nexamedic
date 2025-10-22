@@ -1,12 +1,17 @@
 "use client";
 import { useRef } from "react";
 import ReactMarkdown from "react-markdown";
+import dynamic from "next/dynamic";
 import { inter } from "../_lib/font";
 import { useRevealOnScroll } from "../_gsap/useRevealOnScroll";
 import { useSplitLinesAnimation } from "../_gsap/useSplitLineAnimation";
 import { useSplitTitleAnimation } from "../_gsap/useSplitTitleAnimation";
 import XParticles from "./XParticles";
 import { VideoSuper } from "./VideoSuper";
+
+const MobileVideoExpand = dynamic(() => import("./MobileVideoExpand"), {
+  ssr: false,
+});
 
 export default function CompanyIntro({ data }) {
   const companyIntroRef = useRef(null);
@@ -51,9 +56,20 @@ export default function CompanyIntro({ data }) {
           >
             <ReactMarkdown>{data?.description}</ReactMarkdown>
           </div>
-          <VideoSuper src="/Nexamedic.webm" />
+
+          <div className="hidden lg:block">
+            <VideoSuper src="/Nexamedic.webm" />
+            <div className="box"></div>
+          </div>
+
+          <div className="min-[951]:hidden">
+            <MobileVideoExpand
+              embedId="XWeJj6U_JZ8"
+              thumbnailUrl="https://img.youtube.com/vi/XWeJj6U_JZ8/sddefault.jpg"
+            />
+          </div>
         </div>
-        <div className="box"></div>
+
         {/* <LinkButton className={"flex items-center gap-4 xl:hidden"}>
           <span className="relative z-20">{data?.cta?.text}</span>
           <Image

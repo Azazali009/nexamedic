@@ -871,7 +871,7 @@ body:has(#our-values-video-video.active) header {
     position: relative !important;
     z-index: 10 !important;
   }
-  
+
   /* Ensure Our Values title stays visible even when video is expanded */
   .video-mobile.fixed #our-value-gsap-title {
     opacity: 1 !important;
@@ -881,7 +881,7 @@ body:has(#our-values-video-video.active) header {
     position: relative !important;
     z-index: 10 !important;
   }
-  
+
   /* Ensure video modal is always on top */
   .video-modal {
     position: fixed !important;
@@ -892,7 +892,7 @@ body:has(#our-values-video-video.active) header {
     z-index: 2147483647 !important;
     background: black !important;
   }
-  
+
   #gsap-description,
   #gsap-title {
     width: 100%;
@@ -940,7 +940,7 @@ body:has(#our-values-video-video.active) header {
     pointer-events: none !important;
     visibility: hidden !important;
   }
-  
+
   /* Hide custom controls bar on mobile since we're using native controls */
   #home-reel-video-video .bar {
     display: none !important;
@@ -955,7 +955,7 @@ body:has(#our-values-video-video.active) header {
     pointer-events: none !important;
     visibility: hidden !important;
   }
-  
+
   /* Hide custom close button and controls bar on mobile - use native video controls */
   #home-reel-video-close {
     display: none !important;
@@ -963,7 +963,7 @@ body:has(#our-values-video-video.active) header {
     visibility: hidden !important;
     pointer-events: none !important;
   }
-  
+
   .bar {
     display: none !important;
   }
@@ -1015,7 +1015,6 @@ body:has(#our-values-video-video.active) header {
   }
   .video-mobile {
     display: block !important;
-    width: 70% !important;
     margin: 0 auto;
     transition: background-color 0.3s ease;
   }
