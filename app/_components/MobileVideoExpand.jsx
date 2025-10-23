@@ -2,20 +2,20 @@
 import React, { useState } from "react";
 
 const MobileVideoExpand = ({
-  embedId = "wM2AZ7kpNMM",
-  thumbnailUrl = "/thumbnail.jpeg",
+  embedId = "IW2YfNh_zpo", // ✅ matching video
+  thumbnailUrl = "https://img.youtube.com/vi/IW2YfNh_zpo/sddefault.jpg", // ✅ matching thumbnail
 }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   return (
-    <div className="relative block w-full md:hidden">
+    <div className="relative w-full hidden max-[993px]:block">
       <div className="relative mx-auto flex aspect-video items-center justify-center overflow-hidden rounded-xl">
         {isVisible ? (
           <div className="h-full w-full bg-black">
             <iframe
               width="100%"
               height="100%"
-              src={`https://www.youtube.com/embed/IW2YfNh_zpo${embedId}${isVisible ? "?autoplay=1" : ""}`}
+              src={`https://www.youtube.com/embed/${embedId}${isVisible ? "?autoplay=1" : ""}`}
               title="YouTube video player"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
