@@ -15,7 +15,7 @@ const MobileVideoExpand = ({
             <iframe
               width="100%"
               height="100%"
-              src={`https://www.youtube.com/embed/${embedId}${isVisible ? "?autoplay=1" : ""}`}
+              src={`https://www.youtube.com/embed/IW2YfNh_zpo${embedId}${isVisible ? "?autoplay=1" : ""}`}
               title="YouTube video player"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
