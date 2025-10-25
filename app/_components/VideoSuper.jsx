@@ -181,13 +181,22 @@ function VideoModel2({ src }) {
 
             scrollProgress.current = 1;
           } else {
+             // Get screen width
+            const screenWidth = window.innerWidth;
+            
+            // values based on screen size
+            let endValue = "bottom-=220 top"; // Default for 1440px and below
+            
+            if (screenWidth >= 1920) {
+              endValue = "bottom-=460 top"; // More offset for 1920px screens
+            }
+
             const tl = gsap.timeline({
               defaults: { duration: 1, ease: "power2.out" },
               scrollTrigger: {
                 trigger: "#company-intro",
                 start: "top center",
-                // end: "bottom-=300 center-=25%",
-                end: "bottom-=220 top",
+                end: endValue, // Use dynamic end value
                 scrub: 1,
               },
             });
