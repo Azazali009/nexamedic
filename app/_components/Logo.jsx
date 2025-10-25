@@ -41,19 +41,27 @@ export default function Logo() {
   //   };
   // }, [isLogoRendered]);
 
+  // Simple direct approach
+  const handleLogoClick = () => {
+    if (window.location.pathname === '/') {
+      window.location.href = '/';
+    }
+  };
+
   if (!isLogoRendered) return <LogoSkeleton />;
   return (
-    <Link
-      href={isLogoRendered && isLogoRendered?.url}
+    <a
+      href={isLogoRendered && isLogoRendered?.url || "/"}
+      onClick={handleLogoClick}
       className="logo-link relative z-30 block duration-300 hover:scale-95"
     >
       <Image
         src={menuLevel === "items" ? whiteLogoUrl : greenLogoUrl}
         width={200}
         height={200}
-        alt={isLogoRendered && isLogoRendered?.text}
+        alt={isLogoRendered && isLogoRendered?.text || "Logo"}
         className="xs:w-52 w-28"
       />
-    </Link>
+    </a>
   );
 }
