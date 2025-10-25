@@ -186,7 +186,8 @@ function VideoModel2({ src }) {
               scrollTrigger: {
                 trigger: "#company-intro",
                 start: "top center",
-                end: "bottom-=300 center-=25%",
+                // end: "bottom-=300 center-=25%",
+                end: "bottom-=220 top",
                 scrub: 1,
               },
             });
