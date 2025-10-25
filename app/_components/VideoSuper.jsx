@@ -83,7 +83,7 @@ function VideoModel2({ src }) {
       composedTexture.colorSpace = THREE.SRGBColorSpace;
 
       const overlayImg = new Image();
-      overlayImg.src = "/img.png";
+      overlayImg.src = "/overlay.png";
       overlayImg.crossOrigin = "anonymous";
       let overlayOpacity = 1;
 
