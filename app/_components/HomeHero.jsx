@@ -31,6 +31,7 @@ export default function HomeHero({ data }) {
         priority
         // sizes="100vw"
         className="-z-1 object-cover sm:hidden"
+        unoptimized
       />
 
       {/* Desktop Image */}
@@ -41,6 +42,7 @@ export default function HomeHero({ data }) {
         alt="home hero desktop"
         priority
         className="-z-1 hidden sm:block"
+        unoptimized
       />
 
       <div className="xs:gap-8 pointer-events-none absolute top-[15%] flex w-[90%] flex-col items-center gap-6">
