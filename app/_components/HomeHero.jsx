@@ -8,9 +8,9 @@ import HomeHero3D from "./HomeHero3D.jsx";
 import { Suspense } from "react";
 
 export default function HomeHero({ data }) {
-  const mobileBg = getImageUrl(data?.mobileBg);
-  const desktopBg = getImageUrl(data?.desktopBg);
-  const categoryImage = getImageUrl(data?.image);
+  // const mobileBg = getImageUrl(data?.mobileBg);
+  // const desktopBg = getImageUrl(data?.desktopBg);
+  // const categoryImage = getImageUrl(data?.image);
 
   return (
     <section
@@ -29,7 +29,7 @@ export default function HomeHero({ data }) {
         fill
         alt="home hero mobile"
         priority
-        sizes="100vw"
+        // sizes="100vw"
         className="-z-1 object-cover sm:hidden"
       />
 
@@ -40,7 +40,6 @@ export default function HomeHero({ data }) {
         fill
         alt="home hero desktop"
         priority
-        sizes="100vw"
         className="-z-1 hidden sm:block"
       />
 
