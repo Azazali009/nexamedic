@@ -1,0 +1,240 @@
+"use client";
+import React, { useRef, useState, useTransition } from "react";
+import FormRow from "./FormRow";
+import Link from "next/link";
+import { contactData } from "../_lib/action";
+import FormErrorMessage from "./FormErrorMessage";
+import FormSuccessMessage from "./FormSuccessMessage";
+import Markdown from "react-markdown";
+import { useSplitTitleAnimation } from "../_gsap/useSplitTitleAnimation";
+import { useSplitLinesAnimation } from "../_gsap/useSplitLineAnimation";
+import emailjs from "@emailjs/browser";
+
+export default function ContactForm({ data }) {
+  const formRef = useRef();
+  const [errorMessage, setErrorMessage] = useState([]);
+  const [successMessage, setSuccessMessage] = useState(null);
+  const [isPending, startTransition] = useTransition();
+
+  // function handleSubmit(formData) {
+  //   startTransition(async () => {
+  //     // 1) send data to email
+  //     const resEmailJs = await emailjs.sendForm(
+  //       "service_65qzo37",
+  //       "template_ml3udel",
+  //       formRef.current,
+  //       {
+  //         publicKey: "P52HfsYa2qxaxU2qg",
+  //       },
+  //     );
+
+  //     if (resEmailJs?.status === 200) {
+  //       setSuccessMessage("Thank you for submitting. We will get back to you within 24 hours.");
+  //     }
+
+  //     // send form data to strapi
+  //     const res = await contactData(formData);
+  //     if (res?.errors) {
+  //       setSuccessMessage(null);
+  //       setErrorMessage(res?.errors?.map((error) => error?.message));
+  //     } else {
+  //       setErrorMessage(null);
+  //       setSuccessMessage(
+  //         "Thank you for submitting. We will get back to you within 24 hours.",
+  //       );
+  //       if (formRef.current) {
+  //         formRef.current.reset();
+  //       }
+  //       // 🕒 Set it back to null after 5 seconds
+  //       setTimeout(() => {
+  //         setSuccessMessage(null);
+  //       }, 5000);
+  //     }
+  //   });
+  // }
+
+  async function submitHandler(formData) {
+    try {
+      // 1️⃣ Pehle: send data to Strapi
+      const res = await contactData(formData);
+
+      if (res?.errors) {
+        // ❌ Strapi me error => email mat bhejo
+        setErrorMessage(res?.errors?.map((error) => error?.message));
+        setSuccessMessage(null);
+        return; // stop here
+      }
+
+      // 2️⃣ Agar Strapi successful hai => ab email bhejo
+      const resEmailJs = await emailjs.sendForm(
+        "service_bwwmqxa",
+        "template_jliebrm",
+        formRef.current,
+        {
+          publicKey: "UIV64u0gvw8hfP01P",
+        },
+      );
+
+      if (resEmailJs?.status === 200) {
+        setErrorMessage(null);
+        setSuccessMessage(
+          "Thank you for submitting. We will get back to you within 24 hours.",
+        );
+
+        // Reset form after success
+        if (formRef.current) {
+          formRef.current.reset();
+        }
+
+        // 🕒 Hide message after 5s
+        setTimeout(() => {
+          setSuccessMessage(null);
+        }, 5000);
+      } else {
+        throw new Error("Email sending failed");
+      }
+    } catch (error) {
+      // ✅ Common error catch (network / validation / email issues)
+      console.error("Form submission error:", error);
+      setSuccessMessage(null);
+      setErrorMessage(["Something went wrong. Please try again later."]);
+    }
+  }
+
+  function handleSubmit(formData) {
+    startTransition(async () => {
+      await submitHandler(formData);
+    });
+  }
+
+  useSplitTitleAnimation({
+    trigger: "#contact-section",
+    titleSelector: "#contact-section .title",
+    start: "top 80%",
+    end: "bottom 20%",
+    direction: "left",
+    duration: 1.8,
+    stagger: 0.05,
+  });
+  useSplitLinesAnimation({
+    trigger: "#contact-section",
+    descriptionSelector: "#contact-section .description",
+    start: "top 40%",
+    duration: 1.8,
+    delay: 0.5,
+    stagger: 0.05,
+  });
+
+  return (
+    <div className="bg-gray-background space-y-3 rounded-2xl px-6 py-12 sm:space-y-6">
+      <h1 className="title text-2xl sm:text-5xl">{data?.title}</h1>
+      <div className="description text-xs sm:text-xl">
+        <Markdown>{data?.description}</Markdown>
+      </div>
+
+      <form
+        // action={(formData) => handleSubmit(formData)}
+        onSubmit={(e) => {
+          e.preventDefault();
+          const formData = new FormData(e.currentTarget);
+          handleSubmit(formData);
+        }}
+        className="!mt-6 grid grid-cols-2 gap-x-4 gap-y-4 sm:!mt-12 sm:gap-y-6"
+        ref={formRef}
+      >
+        <FormRow label="First name *">
+          <input
+            required
+            id="firstName"
+            type="text"
+            name="firstName"
+            autoComplete="first name"
+            placeholder="First Name"
+            className="min-h-6 rounded-md border border-[#D9D9D9] bg-white px-4 placeholder:text-[11px] placeholder:text-[#A4ADB3] focus:border-[#D9D9D9] focus:outline-none sm:h-12 sm:rounded-2xl sm:placeholder:text-lg"
+          />
+        </FormRow>
+        <FormRow label="Last name">
+          <input
+            id="lastName"
+            type="text"
+            name="lastName"
+            autoComplete="last name"
+            placeholder="Last Name"
+            className="min-h-6 rounded-md border border-[#D9D9D9] bg-white px-4 placeholder:text-[11px] placeholder:text-[#A4ADB3] focus:border-[#D9D9D9] focus:outline-none sm:h-12 sm:rounded-2xl sm:placeholder:text-lg"
+          />
+        </FormRow>
+        <FormRow label="Email *" extendCols={2}>
+          <input
+            required
+            id="email"
+            type="email"
+            name="email"
+            autoComplete="email"
+            placeholder="Email"
+            className="min-h-6 rounded-md border border-[#D9D9D9] bg-white px-4 placeholder:text-[11px] placeholder:text-[#A4ADB3] focus:border-[#D9D9D9] focus:outline-none sm:h-12 sm:rounded-2xl sm:placeholder:text-lg"
+          />
+        </FormRow>
+        <FormRow label="Company *" extendCols={2}>
+          <input
+            required
+            id="company"
+            type="text"
+            name="company"
+            placeholder="Company"
+            className="min-h-6 rounded-md border border-[#D9D9D9] bg-white px-4 placeholder:text-[11px] placeholder:text-[#A4ADB3] focus:border-[#D9D9D9] focus:outline-none sm:h-12 sm:rounded-2xl sm:placeholder:text-lg"
+          />
+        </FormRow>
+        <FormRow label="Phone number *" extendCols={2}>
+          <input
+            required
+            id="phoneNumber"
+            type="tel"
+            name="phone"
+            placeholder="+ 41 000 000 0000 "
+            className="min-h-6 rounded-md border border-[#D9D9D9] bg-white px-4 placeholder:text-[11px] placeholder:text-[#A4ADB3] focus:border-[#D9D9D9] focus:outline-none sm:h-12 sm:rounded-2xl sm:placeholder:text-lg"
+          />
+        </FormRow>
+        <FormRow label="Interested in " extendCols={2}>
+          <input
+            id="InterestedIn"
+            type="text"
+            name="InterestedIn"
+            placeholder="Product name"
+            className="min-h-6 rounded-md border border-[#D9D9D9] bg-white px-4 placeholder:text-[11px] placeholder:text-[#A4ADB3] focus:border-[#D9D9D9] focus:outline-none sm:h-12 sm:rounded-2xl sm:placeholder:text-lg"
+          />
+        </FormRow>
+        <FormRow label="Message" extendCols={2}>
+          <textarea
+            placeholder="Leave us a message"
+            className="min-h-20 rounded-md border border-[#D9D9D9] bg-white px-4 pt-2 placeholder:text-[11px] placeholder:text-[#A4ADB3] focus:border-[#D9D9D9] focus:outline-none sm:min-h-32 sm:rounded-2xl sm:placeholder:text-lg"
+            name="message"
+            id="message"
+          ></textarea>
+        </FormRow>
+        <div className="[grid-column:1/-1] flex items-center gap-2">
+          <input
+            required
+            name="isAgreeWithPrivacyPolicy"
+            id="isAgreeWithPrivacyPolicy"
+            className="border-gray-secondary accent-primary checked:border-primary checked:bg-primary h-[1.1rem] w-[1.1rem] cursor-pointer appearance-none rounded-xs border bg-white transition duration-150"
+            type="checkbox"
+          />
+          <label className="text-[10px] sm:text-base">
+            You agree to our friendly{" "}
+            <Link href={"#"} className="underline">
+              privacy policy
+            </Link>
+          </label>
+        </div>
+        <button
+          disabled={isPending}
+          className="bg-primary [grid-column:1/-1] block w-fit cursor-pointer rounded-full px-4 py-2 text-xs text-white capitalize duration-300 hover:scale-95 sm:h-12 sm:text-xl"
+        >
+          {isPending ? "sending..." : "Send message"}
+        </button>
+        <FormErrorMessage errorMessage={errorMessage} />
+        <FormSuccessMessage successMessage={successMessage} />
+      </form>
+    </div>
+  );
+}

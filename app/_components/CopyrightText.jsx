@@ -1,0 +1,47 @@
+"use client";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import React from "react";
+
+export default function CopyrightText() {
+  return (
+    <div className="relative z-10 mx-auto mt-8 grid w-[85%] grid-cols-1 justify-between gap-3 text-xs sm:mt-auto sm:grid-cols-2 sm:gap-0">
+      <p className="mt-8 sm:mt-0">@ 2025 Nexamedic</p>
+      <ul className="-order-1 flex w-full flex-wrap items-center justify-between gap-2 sm:order-1">
+        <li className="relative">
+          <Link
+            className="underline-hover"
+            target="_blank"
+            href={"https://www.linkedin.com/company/nexamedic-sa/"}
+          >
+            LinkedIn
+          </Link>
+        </li>
+        <li className="relative">
+          <Link
+            target="_blank"
+            className="underline-hover"
+            href={"https://www.youtube.com/@NexamedicSA"}
+          >
+            Youtube
+          </Link>
+        </li>
+        <li className="relative">
+          <Link className="underline-hover" href={"/privacy-policy"}>
+            Privacy policy
+          </Link>
+        </li>
+        <li className="relative">
+          <Link className="underline-hover" href={"/terms"}>
+            General terms
+          </Link>
+        </li>
+        <li className="relative">
+          <Link className="underline-hover" href={"/impressum"}>
+            Impressum
+          </Link>
+        </li>
+      </ul>
+    </div>
+  );
+}
