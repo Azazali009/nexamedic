@@ -1,11 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import HeroContent from "./HeroContent";
-import { getImageUrl } from "../_lib/helpers";
-import HomeCategoryImage from "./HomeCategoryImage.jsx";
-import HomeHero3D from "./HomeHero3D.jsx";
 import { Suspense } from "react";
+import HeroContent from "./HeroContent";
+import HomeHero3D from "./HomeHero3D.jsx";
 
 export default function HomeHero({ data }) {
   // const mobileBg = getImageUrl(data?.mobileBg);
@@ -25,7 +23,7 @@ export default function HomeHero({ data }) {
 
       {/* Mobile Image */}
       <Image
-        src={"/home-hero-bg-mobile.png"}
+        src={"/hero-bg-mobile.png"}
         fill
         alt="home hero mobile"
         priority
@@ -37,7 +35,7 @@ export default function HomeHero({ data }) {
       {/* Desktop Image */}
       <Image
         // src={data?.desktopBg.url}
-        src={"/home-hero-bg.png"}
+        src={"/hero-bg-desktop.png"}
         fill
         alt="home hero desktop"
         priority

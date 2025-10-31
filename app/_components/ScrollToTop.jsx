@@ -7,16 +7,19 @@ export default function ScrollToTop() {
   const pathname = usePathname();
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      // Use timeout to ensure it runs after new content is rendered
-      setTimeout(() => {
-        window.scrollTo({
-          top: 0,
-          left: 0,
-          behavior: "instant", // or "smooth"
-        });
-      }, 100);
-    }
+    if (typeof window === "undefined") return;
+
+    // Wait for the new route to mount
+    const timer = setTimeout(() => {
+      // Scroll immediately (no animation delay)
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "auto",
+      });
+    }, 300); // slightly longer delay for production hydration
+
+    return () => clearTimeout(timer);
   }, [pathname]);
 
   return null;

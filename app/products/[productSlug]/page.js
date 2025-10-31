@@ -1,4 +1,5 @@
 import ProductPage from "@/app/_components/ProductPage";
+import ScrollToTop from "@/app/_components/ScrollToTop";
 import { fetchDataFromApi } from "@/app/_utils/strapiFetcher";
 import qs from "qs";
 import React from "react";
@@ -66,6 +67,7 @@ export default async function Page({ params }) {
   }
   return (
     <div className="mx-auto w-[85%]">
+      <ScrollToTop />
       <ProductPage product={product} />
     </div>
   );
