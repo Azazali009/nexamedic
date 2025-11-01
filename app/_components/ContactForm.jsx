@@ -221,7 +221,7 @@ export default function ContactForm({ data }) {
           />
           <label className="text-[10px] sm:text-base">
             You agree to our friendly{" "}
-            <Link href={"#"} className="underline">
+            <Link href={"/privacy-policy"} className="underline">
               privacy policy
             </Link>
           </label>
