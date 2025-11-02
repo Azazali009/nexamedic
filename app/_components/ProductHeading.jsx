@@ -59,7 +59,6 @@ export default function ProductHeading({ product }) {
           </div>
         )} */}
       </div>
-
       <h1
         id="title"
         className={`text-3xl ${inter.className} leading-[1.3] font-medium capitalize md:text-[60px]`}
