@@ -63,7 +63,7 @@ export default function ProductHeading({ product }) {
         id="title"
         className={`text-3xl ${inter.className} leading-[1.3] font-medium capitalize md:text-[60px]`}
       >
-        {product?.name?.replace("₂", "<sub>2</sub>")}
+        {product?.name}
       </h1>
     </div>
   );
