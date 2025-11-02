@@ -5,6 +5,7 @@ export const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  fallback: ["Segoe UI Symbol", "Arial Unicode MS", "sans-serif"],
 });
 
 export const playfairDisplay = Playfair_Display({
