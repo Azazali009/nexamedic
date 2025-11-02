@@ -1,10 +1,8 @@
 "use client";
 import { useGSAP } from "@gsap/react";
-import { useRevealOnScroll } from "../_gsap/useRevealOnScroll";
-import { useSplitLinesAnimation } from "../_gsap/useSplitLineAnimation";
-import { useSplitTitleAnimation } from "../_gsap/useSplitTitleAnimation";
-import { useTitleCharsAnimation } from "../_gsap/useTitleCharsAnimation";
 import gsap from "gsap";
+import { useTitleCharsAnimation } from "../_gsap/useTitleCharsAnimation";
+import { inter } from "../_lib/font";
 
 export default function ProductHeading({ product }) {
   useTitleCharsAnimation({
@@ -64,7 +62,7 @@ export default function ProductHeading({ product }) {
 
       <h1
         id="title"
-        className="text-3xl leading-[1.3] font-medium capitalize md:text-[60px]"
+        className={`text-3xl ${inter.className} leading-[1.3] font-medium capitalize md:text-[60px]`}
       >
         {product?.name}
       </h1>

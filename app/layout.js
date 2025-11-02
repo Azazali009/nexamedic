@@ -4,11 +4,10 @@ import Footer from "./_components/Footer";
 import GoogleAnalytics from "./_components/GoogleAnalytics";
 import Header from "./_components/Header";
 // import LenisProvider from "./_components/LenisProvider";
+import ScrollToTop from "./_components/ScrollToTop";
 import { inter } from "./_lib/font";
 import "./globals.css";
 import Providers from "./providers";
-import { Scroll } from "@react-three/drei";
-import ScrollToTop from "./_components/ScrollToTop";
 
 export const metadata = {
   title: "Nexamedic |",

@@ -1,10 +1,13 @@
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import LinkButton from "./LinkButton";
+import { inter } from "../_lib/font";
 export default function ProductFeatures({ product }) {
   return (
     <div className="space-y-6">
-      <div className="prose xs:prose-h2:text-[30px] prose-h2:text-base xs:text-xl max-w-none text-sm">
+      <div
+        className={`prose xs:prose-h2:text-[30px] prose-h2:text-base xs:text-xl max-w-none text-sm ${inter.className}`}
+      >
         <ReactMarkdown>{product?.description}</ReactMarkdown>
       </div>
 
