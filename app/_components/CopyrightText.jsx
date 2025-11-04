@@ -21,7 +21,7 @@ export default function CopyrightText() {
           <Link
             target="_blank"
             className="underline-hover"
-            href={"https://www.youtube.com/@NexamedicSA"}
+            href={"/temporarily-unavailable"}
           >
             Youtube
           </Link>

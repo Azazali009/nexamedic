@@ -2,8 +2,6 @@ import qs from "qs";
 import CareerHero from "../_components/CareerHero";
 import JobListings from "../_components/JobListings";
 import { fetchDataFromApi } from "../_utils/strapiFetcher";
-import Image from "next/image";
-import XParticles from "../_components/XParticles";
 export async function generateMetadata() {
   const data = await fetchDataFromApi("/api/career");
   return { title: data?.title, description: data?.description };
