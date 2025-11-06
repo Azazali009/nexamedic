@@ -100,31 +100,31 @@ export default function HomeHeroModel(props) {
       name: "shape1",
       position: [-1.651, 0.824, 0.46],
       hoverText: "X-ray protection",
-      url: "/categories/x-ray-protection",
+      url: "/portfolio/x-ray-protection",
     },
     {
       name: "shape2",
       position: [-0.834, 0.784, -0.533],
       hoverText: "Dialysis",
-      url: "/categories/dialysis",
+      url: "/portfolio/dialysis",
     },
     {
       name: "shape3",
       position: [0.111, 0.707, 0.978],
       hoverText: "Angiography",
-      url: "/categories/angiography",
+      url: "/portfolio/angiography",
     },
     {
       name: "shape4",
       position: [0.787, 1, -0.596],
       hoverText: "Endovascular solutions",
-      url: "/categories/endovascular",
+      url: "/portfolio/endovascular",
     },
     {
       name: "shape5",
       position: [1.716, 0.725, 0.275],
       hoverText: "Neuro",
-      url: "/categories/neuro",
+      url: "/portfolio/neuro",
     },
   ];
 
