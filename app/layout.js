@@ -13,7 +13,7 @@ export const metadata = {
   title: "Nexamedic |",
   description: "This site is under construction",
   other: {
-    "google-site-verification": "XE0zg03LiBExpX3qPs2hB4wj6JQu-_TJwiQLERkp3xc",
+    "google-site-verification": "NHfJkN22bU3vSEE35df8ql_4wrHDVy76zrjk_FEpKbM",
   },
 };
 
@@ -30,18 +30,17 @@ export default function RootLayout({ children }) {
       <head>
         {/* Microsoft Clarity Script */}
         <Script
-          id="microsoft-clarity"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function(c,l,a,r,i,t,y){
-                  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-                  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-                  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-              })(window, document, "clarity", "script", "txsxjf0f4g");
-            `,
-          }}
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-L7NG82T2T9"
         />
+        <Script id="google-analytics">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-L7NG82T2T9');
+          `}
+        </Script>
       </head>
       {/* <LenisProvider> */}
       <body
