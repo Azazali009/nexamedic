@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 
 const MobileVideoExpand = ({
-  embedId = "IW2YfNh_zpo", // ✅ matching video
-  thumbnailUrl = "https://img.youtube.com/vi/IW2YfNh_zpo/sddefault.jpg", // ✅ matching thumbnail
+  embedId = "OB_etu7bBqc", // ✅ matching video
+  thumbnailUrl = "https://img.youtube.com/vi/OB_etu7bBqc/sddefault.jpg", // ✅ matching thumbnail
 }) => {
   const [isVisible, setIsVisible] = useState(false);
 

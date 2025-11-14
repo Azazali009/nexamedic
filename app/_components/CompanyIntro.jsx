@@ -64,8 +64,8 @@ export default function CompanyIntro({ data }) {
 
           <div className="min-[951]:hidden">
             <MobileVideoExpand
-              embedId="89_JqYup5NA"
-              thumbnailUrl="https://img.youtube.com/vi/89_JqYup5NA/sddefault.jpg"
+              embedId="nnVp2Pqk-Y8"
+              thumbnailUrl="https://img.youtube.com/vi/nnVp2Pqk-Y8/sddefault.jpg"
             />
           </div>
         </div>
