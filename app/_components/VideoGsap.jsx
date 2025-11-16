@@ -263,12 +263,12 @@ export default function VideoGsap() {
   return (
     <div
       ref={containerRef}
-      className="relative hidden h-screen w-full items-center justify-center md:-mt-24 md:flex"
+      className="relative hidden h-screen w-full items-center justify-center md:-mt-24 lg:flex"
       suppressHydrationWarning
     >
       <div
         ref={videoWrapperRef}
-        className="relative z-[60] w-[55vw] overflow-hidden"
+        className="relative mx-auto z-[60] w-[55vw] overflow-hidden"
         style={{
           transition: "all 0.8s ease-out",
           ["--radius"]: "24px",

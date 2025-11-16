@@ -721,6 +721,18 @@ body:has(#our-values-video-video.active) header {
   width: 42vw;
 }
 
+@media (max-width:1023px) {
+  #gsap-description,
+    #gsap-title {
+      width: 95vw;
+    }
+
+    #our-value-gsap-title, 
+      .video-mobile.fixed #our-value-gsap-title {
+        transform: none !important;
+    }
+}
+ 
 .row-1 {
   top: -22vw;
 }
