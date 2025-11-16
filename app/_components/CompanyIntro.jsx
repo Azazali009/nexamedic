@@ -44,14 +44,14 @@ export default function CompanyIntro({ data }) {
         className="xs:space-y-12 mx-auto mt-10 w-[85%] space-y-6 py-20"
       >
         <h2
-          className={`${inter.className} xs:text-3xl xs:tracking-tighter text-xl leading-[1.2] font-normal md:text-4xl lg:text-6xl xl:w-[85%]`}
+          className={`${inter.className} xs:text-3xl xs:tracking-tighter text-xl leading-[1.2] font-normal md:text-4xl lg:text-6xl xl:w-[85%] max-[1024px]:w-full`}
           id="gsap-title"
         >
           {data?.title}
         </h2>
         <div className="grid grid-cols-1 gap-10 xl:grid-cols-[1.5fr_1.3fr]">
           <div
-            className="xs:text-lg prose w-full max-w-none space-y-4 text-sm leading-[1.5]"
+            className="xs:text-lg prose w-full max-w-none space-y-4 text-sm leading-[1.5] max-[1024px]:w-full"
             id="gsap-description"
           >
             <ReactMarkdown>{data?.description}</ReactMarkdown>
@@ -62,7 +62,7 @@ export default function CompanyIntro({ data }) {
             <div className="box"></div>
           </div>
 
-          <div className="min-[951]:hidden">
+          <div className="hidden max-[1024px]:block">
             <MobileVideoExpand
               embedId="nnVp2Pqk-Y8"
               thumbnailUrl="https://img.youtube.com/vi/nnVp2Pqk-Y8/sddefault.jpg"

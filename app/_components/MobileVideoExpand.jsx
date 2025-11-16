@@ -1,27 +1,47 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 const MobileVideoExpand = ({
-  embedId = "OB_etu7bBqc", // ✅ matching video
-  thumbnailUrl = "https://img.youtube.com/vi/OB_etu7bBqc/sddefault.jpg", // ✅ matching thumbnail
+  embedId = "OB_etu7bBqc",
+  thumbnailUrl = "https://img.youtube.com/vi/OB_etu7bBqc/sddefault.jpg",
 }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const playerRef = useRef(null);
+
+  useEffect(() => {
+    // Load YouTube IFrame API
+    if (!isVisible) return;
+
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    window.onYouTubeIframeAPIReady = () => {
+      playerRef.current = new window.YT.Player('youtube-player', {
+        videoId: embedId,
+        playerVars: {
+          autoplay: 1,
+          modestbranding: 1,
+          rel: 0,
+          showinfo: 0,
+          fs: 1, // Enable fullscreen button
+          playsinline: 0 // iOS fullscreen
+        },
+        events: {
+          onReady: (event) => {
+            // Player is ready
+          }
+        }
+      });
+    };
+  }, [isVisible, embedId]);
 
   return (
-    <div className="relative w-full hidden max-[993px]:block">
+    <div className="relative w-full hidden max-[1024px]:block">
       <div className="relative mx-auto flex aspect-video items-center justify-center overflow-hidden rounded-xl">
         {isVisible ? (
-          <div className="h-full w-full bg-black">
-            <iframe
-              width="100%"
-              height="100%"
-              src={`https://www.youtube.com/embed/${embedId}${isVisible ? "?autoplay=1" : ""}`}
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-            ></iframe>
-          </div>
+          <div id="youtube-player" className="h-full w-full"></div>
         ) : (
           <div className="relative h-full w-full">
             <img
@@ -31,20 +51,10 @@ const MobileVideoExpand = ({
             />
             <button
               onClick={() => setIsVisible(true)}
-              id="our-values-video-watch-btn"
               aria-label="Watch video"
-              style={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-              }}
-              className="flex items-center justify-center"
+              className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center"
             >
-              <div id="our-values-video-watch-btn-base"></div>
-              <div id="our-values-video-watch-btn-background"></div>
               <svg
-                id="our-values-video-watch-btn-svg"
                 xmlns="http://www.w3.org/2000/svg"
                 width="36"
                 height="36"

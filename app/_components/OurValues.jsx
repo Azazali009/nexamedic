@@ -58,7 +58,7 @@ export default function OurValues({ data }) {
         <VideoGsap />
       </div>
 
-      <div className="min-[951]:hidden">
+      <div className="max-[1024px]:block! hidden">
         <MobileVideoExpand />
       </div>
     </section>
